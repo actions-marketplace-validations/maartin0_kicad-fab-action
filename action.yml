@@ -1,0 +1,21 @@
+name: Generate KiCad PCB fabrication files
+description: Generates fabrication (gerber and drill) files for the provided `.kicad_pcb` file on all layers into a zip
+
+branding:
+  icon: "file"
+  color: "blue"
+
+inputs:
+  pcb:
+    description: ".kicad_pcb to generate files for"
+    required: true
+  output:
+    description: "Location to put generated zip (should end in .zip)"
+    required: true
+    default: "fabrication.zip"
+runs:
+  using: "docker"
+  image: "docker://ghcr.io/maartin0/kicad-fab-action:v1"
+  args:
+    - ${{ inputs.pcb }}
+    - ${{ inputs.output }}
